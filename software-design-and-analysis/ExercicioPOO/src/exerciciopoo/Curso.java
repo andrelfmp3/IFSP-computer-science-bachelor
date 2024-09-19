@@ -9,52 +9,63 @@ package exerciciopoo;
  * @author andrelf
  */
 public class Curso {
-    
-    // Atributos
+
     private String nome;
     private int duracaoMeses;
     private Professor professor;
     private Biblioteca biblioteca;
-    
-    // Construtor
-    public Curso (String nome, int duracaoMeses, Professor professor, Biblioteca biblioteca){
+
+    public Curso(String nome, int duracaoMeses, Professor professor, Biblioteca biblioteca) {
         this.nome = nome;
         this.duracaoMeses = duracaoMeses;
         this.professor = professor;
         this.biblioteca = biblioteca;
     }
-    
-    // Métodos
-    public String getNome(){
+
+    public String getNome() {
         return nome;
     }
-    
-    public void setNome (String nome){
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    public int getDuracaoMeses(){
+
+    public int getDuracaoMeses() {
         return duracaoMeses;
     }
-    
-    public void setDuracaoMeses (int duracaoMeses){
+
+    public void setDuracaoMeses(int duracaoMeses) {
         this.duracaoMeses = duracaoMeses;
     }
-    
-    public Professor getProfessor(){
+
+    public Professor getProfessor() {
         return professor;
     }
-    
-    public void setProfessor(Professor professor){
+
+    public void setProfessor(Professor professor) {
         this.professor = professor;
     }
-            
-    public void iniciarAulas(){
-        System.out.println("Iniciando aula do curso");
-    }
-            
-    public void exibirInformacoes(){
-        System.out.printf("Curso: %s, Duração: %d meses, Professor: %s", nome, duracaoMeses, professor);
-    }
 
+    public void iniciarAulas() {
+        System.out.println("Iniciando aula do curso " + nome);
+    }
+        
+    public void exibirInformacoes() {
+    System.out.printf("Curso: %s, Duração: %d meses, Professor: %s%n", nome, duracaoMeses, professor.getNome());
+    }
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            

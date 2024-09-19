@@ -9,17 +9,18 @@ package exerciciopoo;
  * @author andrelf
  */
 public class Biblioteca {
-    
-    // Atributos
+
     private String nome;
-    
-    // Construtor
-    public Biblioteca(String nome){
+
+    public Biblioteca(String nome) {
         this.nome = nome;
     }
     
-    // Métodos
-    public void exibirInformações(){
-        System.out.print("Biblioteca associada: " + nome);
-    } 
+    public String getNome() {
+        return nome;
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Biblioteca associada: " + nome);
+    }
 }
