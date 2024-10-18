@@ -3,20 +3,26 @@ package projetoesdlinear;
 import projetoesdlinear.engine.Engine;
 
 /**
- *
+ * Simulador de lista:
+ *     Simula as seguintes operações de uma lista encadeada/ligada/dinâmica:
+ *         - Inserir no fim;
+ *         - Inserir em posição especificada;
+ *         - Alterar em posição especificada;
+ *         - Remover de posição especificada
+ * 
  * @author Prof. Dr. David Buzatto
  */
-public class SimuladorDeque extends Engine {
+public class SimuladorLista extends Engine {
 
     // declaração de variáveis
 
-    public SimuladorDeque() {
+    public SimuladorLista() {
 
         // cria a janela do jogo ou simulação
         super( 
             800,                  // 800 pixels de largura
             600,                  // 600 pixels de largura
-            "Simulador de Deques",// título da janela
+            "Simulador de Lista", // título da janela
             true,                 // ativa a suavização (antialiasing)
             60 );                 // 60 quadros por segundo
 
@@ -45,7 +51,7 @@ public class SimuladorDeque extends Engine {
     }
 
     public static void main( String[] args ) {
-        new SimuladorDeque();
+        new SimuladorLista();
     }
     
 }

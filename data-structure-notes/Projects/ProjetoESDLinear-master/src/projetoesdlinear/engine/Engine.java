@@ -18,13 +18,17 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  * Engine simples para criação de jogos ou simulações usando Java 2D.
  * Grande parte da sua API é baseada na engine de jogos Raylib (www.raylib.com).
+ * 
+ * Observação: Versão anterior com toda a implementação feita internamente.
  * 
  * @author Prof. Dr. David Buzatto
  * @copyright Copyright (c) 2024
@@ -171,8 +175,14 @@ public abstract class Engine extends JFrame {
                 while ( executando ) {
 
                     tempoAntes = System.currentTimeMillis();
-                    atualizar();
-                    painelDesenho.repaint();
+                    try {
+                        SwingUtilities.invokeAndWait( () -> {
+                            atualizar();
+                            painelDesenho.repaint();
+                        });
+                    } catch ( InterruptedException | InvocationTargetException exc ) {
+                        exc.printStackTrace();
+                    }
                     tempoDepois = System.currentTimeMillis();
 
                     // quanto um frame demorou?
@@ -198,7 +208,6 @@ public abstract class Engine extends JFrame {
 
                     try {
                         Thread.sleep( tempoEsperar );
-                        painelDesenho.repaint();
                     } catch ( InterruptedException exc ) {
                         exc.printStackTrace();
                     }
@@ -1812,7 +1821,7 @@ public abstract class Engine extends JFrame {
      * @param triangle um triângulo.
      * @param color cor de desenho.
      */
-    public void drawTriangles( Triangle2D triangle, Color color ) {
+    public void drawTriangle( Triangle2D triangle, Color color ) {
         drawTriangle( triangle.x1, triangle.y1, triangle.x2, triangle.y2, triangle.x3, triangle.y3, color );
     }
 
@@ -2064,7 +2073,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointLinear( double p1x, double p1y, double p2x, double p2y, double t ) {
+    public static Point2D getSplinePointLinear( double p1x, double p1y, double p2x, double p2y, double t ) {
 
         double x = p1x * ( 1.0f - t ) + p2x * t;
         double y = p1y * ( 1.0f - t ) + p2y * t;
@@ -2081,7 +2090,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointLinear( Vector2D p1, Vector2D p2, double t ) {
+    public static Point2D getSplinePointLinear( Vector2D p1, Vector2D p2, double t ) {
         return getSplinePointLinear( p1.x, p1.y, p2.x, p2.y, t )        ;
     }
 
@@ -2093,7 +2102,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointLinear( Point2D p1, Point2D p2, double t ) {
+    public static Point2D getSplinePointLinear( Point2D p1, Point2D p2, double t ) {
         return getSplinePointLinear( p1.x, p1.y, p2.x, p2.y, t )        ;
     }
 
@@ -2104,7 +2113,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointLinear( Line2D line, double t ) {
+    public static Point2D getSplinePointLinear( Line2D line, double t ) {
         return getSplinePointLinear( line.x1, line.y1, line.x2, line.y2, t );
     }
 
@@ -2177,7 +2186,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierQuad( double p1x, double p1y, double cx, double cy, double p2x, double p2y, double t ) {
+    public static Point2D getSplinePointBezierQuad( double p1x, double p1y, double cx, double cy, double p2x, double p2y, double t ) {
 
         double a = Math.pow( 1.0 - t, 2 );
         double b = 2.0 * ( 1.0 - t ) * t;
@@ -2199,7 +2208,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierQuad( Vector2D p1, Vector2D c, Vector2D p2, double t ) {
+    public static Point2D getSplinePointBezierQuad( Vector2D p1, Vector2D c, Vector2D p2, double t ) {
         return getSplinePointBezierQuad( p1.x, p1.y, c.x, c.y, p2.x, p2.y, t );
     }
 
@@ -2212,7 +2221,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierQuad( Point2D p1, Point2D c, Point2D p2, double t ) {
+    public static Point2D getSplinePointBezierQuad( Point2D p1, Point2D c, Point2D p2, double t ) {
         return getSplinePointBezierQuad( p1.x, p1.y, c.x, c.y, p2.x, p2.y, t );
     }
     
@@ -2223,7 +2232,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierQuad( QuadCurve2D quadCurve, double t ) {
+    public static Point2D getSplinePointBezierQuad( QuadCurve2D quadCurve, double t ) {
         return getSplinePointBezierQuad( quadCurve.x1, quadCurve.y1, quadCurve.cx, quadCurve.cy, quadCurve.x2, quadCurve.y2, t );
     }
 
@@ -2302,7 +2311,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierCubic( double p1x, double p1y, double c1x, double c1y, double c2x, double c2y, double p2x, double p2y, double t ) {
+    public static Point2D getSplinePointBezierCubic( double p1x, double p1y, double c1x, double c1y, double c2x, double c2y, double p2x, double p2y, double t ) {
 
         double a = Math.pow( 1.0 - t, 3 );
         double b = 3.0 * Math.pow( 1.0 - t, 2 ) * t;
@@ -2326,7 +2335,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierCubic( Vector2D p1, Vector2D c1, Vector2D c2, Vector2D p2, double t ) {
+    public static Point2D getSplinePointBezierCubic( Vector2D p1, Vector2D c1, Vector2D c2, Vector2D p2, double t ) {
         return getSplinePointBezierCubic( p1.x, p1.y, c1.x, c1.y, c2.x, c2.y, p2.x, p2.y, t );
     }
 
@@ -2340,7 +2349,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierCubic( Point2D p1, Point2D c1, Point2D c2, Point2D p2, double t ) {
+    public static Point2D getSplinePointBezierCubic( Point2D p1, Point2D c1, Point2D c2, Point2D p2, double t ) {
         return getSplinePointBezierCubic( p1.x, p1.y, c1.x, c1.y, c2.x, c2.y, p2.x, p2.y, t );
     }
 
@@ -2351,7 +2360,7 @@ public abstract class Engine extends JFrame {
      * @param t Um valor de 0 a 1 que representa a posição, em porcentagem, do ponto desejado.
      * @return O ponto dentro da spline.
      */
-    public Point2D getSplinePointBezierCubic( CubicCurve2D cubicCurve, double t ) {
+    public static Point2D getSplinePointBezierCubic( CubicCurve2D cubicCurve, double t ) {
         return getSplinePointBezierCubic( cubicCurve.x1, cubicCurve.y1, cubicCurve.c1x, cubicCurve.c1y, cubicCurve.c2x, cubicCurve.c2y, cubicCurve.x2, cubicCurve.y2, t );
     }
 
@@ -2419,14 +2428,14 @@ public abstract class Engine extends JFrame {
      * @param args Uma série de argumentos que serão inseridos no padrão.
      * @return o texto formatado.
      */
-    public String textFormat( String text, Object... args  ) {
+    public static String textFormat( String text, Object... args  ) {
         return String.format( text, args );
     }
 
 
 
     /***************************************************************************
-     * Métodos utilitários.
+     * Métodos utilitários matemáticos (baseados na raymath.h).
      **************************************************************************/
 
     /**
@@ -2434,25 +2443,63 @@ public abstract class Engine extends JFrame {
      * 
      * @param start valor inicial.
      * @param end valor final.
-     * @param t quantidade (0 a 1)
+     * @param amount quantidade (0 a 1)
      * @return A interpolação linear entre dois valores.
      */
-    public double lerp( double start, double end, double t ) {
-        return start + ( end - start ) * t;
+    public static double lerp( double start, double end, double amount ) {
+        return start + amount * ( end - start );
     }
 
     /**
-     * Realiza a interpolação linear entre dois vetores.
+     * Realiza o clamp entre dois valores.
      * 
-     * @param start ponto inicial.
-     * @param end ponto final.
-     * @param t quantidade (0 a 1)
-     * @return Um ponto que representa a interpolação linear entre dois pontos.
+     * @param value O valor.
+     * @param min O valor mínimo.
+     * @param max O valor máximo.
+     * @return O valor fixado entre mínimo e máximo.
      */
-    public Vector2D lerp( Vector2D start, Vector2D end, double t ) {
-        double x = start.x + ( end.x - start.x ) * t;
-        double y = start.y + ( end.y - start.y ) * t;
-        return new Vector2D( x, y );
+    public static double clamp( double value, double min, double max ) {
+        double result = value < min ? min : value;
+        if ( result > max ) result = max;
+        return result;
+    }    
+
+    /**
+     * Normaliza o valor dentro do intervalo fornecido.
+     * 
+     * @param value O valor.
+     * @param start O valor inicial.
+     * @param end O valor final.
+     * @return O valor normalizado entre o valor inicial e final.
+     */
+    public static double normalize(double value, double start, double end ) {
+        return ( value - start ) / ( end - start );
+    }
+
+    /**
+     * Remapeia um valor entre um intervalo de entrada e um intervalo de saída.
+     * 
+     * @param value O valor.
+     * @param inputStart O valor inicial do intervalo de entrada.
+     * @param inputEnd O valor final do intervalo de entrada.
+     * @param outputStart O valor inicial do intervalo de saída.
+     * @param outputEnd O valor final do intervalo de saída.
+     * @return O valor remapeado.
+     */
+    public static double remap( double value, double inputStart, double inputEnd, double outputStart, double outputEnd ) {
+        return ( value - inputStart ) / ( inputEnd - inputStart ) * ( outputEnd - outputStart ) + outputStart;
+    }
+
+    /**
+     * Coloca um valor entre um valor mínimo e máximo.
+     * 
+     * @param value O valor.
+     * @param min O valor mínimo.
+     * @param max O valor máximo.
+     * @return O valor ajustado.
+     */
+    public static double wrap( double value, double min, double max ) {
+        return value - ( max - min ) * Math.floor( ( value - min ) / ( max - min ) );
     }
 
     /**
@@ -2460,14 +2507,384 @@ public abstract class Engine extends JFrame {
      * 
      * @param start ponto inicial.
      * @param end ponto final.
-     * @param t quantidade (0 a 1)
+     * @param amount quantidade (0 a 1)
      * @return Um ponto que representa a interpolação linear entre dois pontos.
      */
-    public Point2D lerp( Point2D start, Point2D end, double t ) {
-        double x = start.x + ( end.x - start.x ) * t;
-        double y = start.y + ( end.y - start.y ) * t;
+    public static Point2D point2Dlerp( Point2D start, Point2D end, double amount ) {
+        double x = start.x + ( end.x - start.x ) * amount;
+        double y = start.y + ( end.y - start.y ) * amount;
         return new Point2D( x, y );
     }
+
+
+    
+    /***************************************************************************
+     * Métodos utilitários matemáticos para vetores 2D (baseados na raymath.h).
+     **************************************************************************/
+
+    /**
+     * Cria um vetor 2D com ambos os componentes iguais a 0.0.
+     * 
+     * @return Um vetor 2D com ambos os componentes iguais a 0.0.
+     */
+    public static Vector2D vector2DZero() {
+        return new Vector2D( 0.0, 0.0 );
+    }
+
+    /**
+     * Cria um vetor 2D com ambos os componentes iguais a 1.0.
+     * 
+     * @return Um vetor 2D com ambos os componentes iguais a 1.0.
+     */
+    public static Vector2D vector2DOne() {
+        return new Vector2D( 1.0, 1.0 );
+    }
+
+    /**
+     * Soma dois vetores 2D.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return Um novo vetor 2D com a soma dos vetores passados.
+     */
+    public static Vector2D vector2DAdd( final Vector2D v1, final Vector2D v2 ) {
+        return new Vector2D( v1.x + v2.x, v1.y + v2.y );
+    }
+
+    /**
+     * Soma um valor a um vetor 2D.
+     * 
+     * @param v Um vetor.
+     * @param value O valor a somar.
+     * @return Um novo vetor 2D com os componentes somados ao valor passado.
+     */
+    public static Vector2D vector2DAddValue( final Vector2D v, double value ) {
+        return new Vector2D( v.x + value, v.y + value );
+    }
+
+    /**
+     * Subtrai dois vetores 2D.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return Um novo vetor 2D com a subtração dos vetores passados.
+     */
+    public static Vector2D vector2DSubtract( final Vector2D v1, final Vector2D v2 ) {
+        return new Vector2D( v1.x - v2.x, v1.y - v2.y );
+    }
+
+    /**
+     * Subtrai um valor de um vetor 2D.
+     * 
+     * @param v Um vetor.
+     * @param value O valor a subtrair.
+     * @return Um novo vetor 2D com os componentes subtraídos do valor passado.
+     */
+    public static Vector2D vector2DSubtractValue( final Vector2D v, double value ) {
+        return new Vector2D( v.x - value, v.y - value );
+    }
+
+    /**
+     * Calcula o comprimento de um vetor 2D.
+     * 
+     * @param v Um vetor.
+     * @return O comprimento do vetor passado.
+     */
+    public static double vector2DLength( final Vector2D v ) {
+        return Math.sqrt( v.x * v.x + v.y * v.y );
+    }
+
+    /**
+     * Calcula o produto escalar entre dois vetores 2D.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return O produto escalar entre os vetores passados.
+     */
+    public static double vector2DDotProduct( final Vector2D v1, final Vector2D v2 ) {
+        return v1.x * v2.x + v1.y * v2.y;
+    }
+
+    /**
+     * Calcula a distância entre dois vetores 2D.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return A distância entre os vetores passados.
+     */
+    public static double vector2DDistance( final Vector2D v1, final Vector2D v2 ) {
+        return Math.sqrt( ( v1.x - v2.x ) * ( v1.x - v2.x ) + ( v1.y - v2.y ) * ( v1.y - v2.y ) );
+    }
+
+    /**
+     * Calcula o ângulo entre dois vetores 2D, sendo que esse ângulo
+     * é calculado a partir do ponto de origem (0, 0).
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return O ângulo entre os dois vetores passados.
+     */
+    public static double vector2DAngle( final Vector2D v1, final Vector2D v2 ) {
+
+        double dot = v1.x * v2.x + v1.y * v2.y;
+        double det = v1.x * v2.y - v1.y * v2.x;
+
+        return Math.atan2( det, dot );
+
+    }
+
+    /**
+     * Escalona um vetor 2D, análogo à multiplicação por escalar.
+     * 
+     * @param v O vetor.
+     * @param scale A escala.
+     * @return Um novo vetor 2D escalonado.
+     */
+    public static Vector2D vector2DScale( final Vector2D v, double scale ) {
+        return new Vector2D( v.x * scale, v.y * scale );
+    }
+
+    /**
+     * Multiplica dois vetores 2D.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return Um novo vetor com o resultado da multiplicação dos vetores passados.
+     */
+    public static Vector2D vector2DMultiply( final Vector2D v1, final Vector2D v2 ) {
+        return new Vector2D( v1.x * v2.x, v1.y * v2.y );
+    }
+
+    /**
+     * Nega um vetor 2D.
+     * 
+     * @param v Um vetor.
+     * @return Um novo vetor com a negação do vetor passado.
+     */
+    public static Vector2D vector2DNegate( final Vector2D v ) {
+        return new Vector2D( -v.x, -v.y );
+    }
+
+    /**
+     * Divide dois vetores.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return Um novo vetor com o resultado da divisão dos vetores passados.
+     */
+    public static Vector2D vector2DDivide( final Vector2D v1, final Vector2D v2 ) {
+        return new Vector2D( v1.x / v2.x, v1.y / v2.y );
+    }
+
+    /**
+     * Normaliza um vetor 2D.
+     * 
+     * @param v Um vetor.
+     * @return Um novo vetor 2D normalizado.
+     */
+    public static Vector2D vector2DNormalize( final Vector2D v ) {
+
+        Vector2D result = vector2DZero();
+        double length = Math.sqrt( v.x * v.x + v.y * v.y );
+
+        if ( length > 0 ) {
+            double ilength = 1.0 / length;
+            result.x = v.x * ilength;
+            result.y = v.y * ilength;
+        }
+
+        return result;
+
+    }
+
+    /**
+     * Realiza a interpolação linear entre dois vetores.
+     * 
+     * @param start ponto inicial.
+     * @param end ponto final.
+     * @param amount quantidade (0 a 1)
+     * @return Um ponto que representa a interpolação linear entre dois pontos.
+     */
+    public static Vector2D vector2DLerp( final Vector2D start, final Vector2D end, double amount ) {
+        double x = start.x + ( end.x - start.x ) * amount;
+        double y = start.y + ( end.y - start.y ) * amount;
+        return new Vector2D( x, y );
+    }
+
+    /**
+     * Calcula um vetor 2D refletido pela normal.
+     * 
+     * @param v Um vetor.
+     * @param normal Vetor normal.
+     * @return Um novo vetor refletido.
+     */
+    public static Vector2D vector2DReflect( final Vector2D v, final Vector2D normal ) {
+
+        Vector2D result = vector2DZero();
+
+        double dotProduct = ( v.x * normal.x + v.y * normal.y ); // produto escalar
+
+        result.x = v.x - ( 2.0 * normal.x ) * dotProduct;
+        result.y = v.y - ( 2.0 * normal.y ) * dotProduct;
+
+        return result;
+
+    }
+
+    /**
+     * Obtem um novo vetor 2D com o mínimo dos componentes.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return Um novo vetor com o mínimo dos componentes dos vetores passados.
+     */
+    public static Vector2D vector2DMin( final Vector2D v1, final Vector2D v2 ) {
+
+        Vector2D result = vector2DZero();
+
+        result.x = Math.min( v1.x, v2.x );
+        result.y = Math.min( v1.y, v2.y );
+
+        return result;
+
+    }
+
+    /**
+     * Obtem um novo vetor 2D com o máximo dos componentes.
+     * 
+     * @param v1 Um vetor.
+     * @param v2 Outro vetor.
+     * @return Um novo vetor com o máximo dos componentes dos vetores passados.
+     */
+    public static Vector2D vector2DMax( final Vector2D v1, final Vector2D v2 ) {
+
+        Vector2D result = vector2DZero();
+
+        result.x = Math.max( v1.x, v2.x );
+        result.y = Math.max( v1.y, v2.y );
+
+        return result;
+
+    }
+
+    /**
+     * Rotaciona um vetor 2D usando um ângulo (em radianos).
+     * 
+     * @param v Um vetor.
+     * @param angle O ângulo.
+     * @return Um novo vetor rotacionado.
+     */
+    public static Vector2D vector2DRotate( final Vector2D v, double angle ) {
+
+        Vector2D result = vector2DZero();
+
+        double cos = Math.cos( angle );
+        double sin = Math.sin( angle );
+
+        result.x = v.x * cos - v.y * sin;
+        result.y = v.x * sin + v.y * cos;
+
+        return result;
+
+    }
+
+    /**
+     * Cria um novo vetor movido em direção a um alvo.
+     * 
+     * @param v Um vetor.
+     * @param target O alvo.
+     * @param maxDistance A distância máxima.
+     * @return Um novo vetor movido em direção ao alvo.
+     */
+    public static Vector2D vector2DMoveTowards( final Vector2D v, final Vector2D target, double maxDistance ) {
+
+        Vector2D result = vector2DZero();
+
+        double dx = target.x - v.x;
+        double dy = target.y - v.y;
+        double value = dx * dx + dy * dy;
+
+        if ( ( value == 0 ) || ( ( maxDistance >= 0 ) && ( value <= maxDistance * maxDistance ) ) ) {
+            return target;
+        }
+
+        double dist = Math.sqrt( value );
+
+        result.x = v.x + dx / dist * maxDistance;
+        result.y = v.y + dy / dist * maxDistance;
+
+        return result;
+
+    }
+
+    /**
+     * Cria um vetor 2D invertido.
+     * 
+     * @param v Um vetor.
+     * @return Um novo vetor invertido.
+     */
+    public static Vector2D vector2DInvert( final Vector2D v ) {
+        return new Vector2D( 1.0 / v.x, 1.0 / v.y );
+    }
+
+    /**
+     * Realiza o clamp de um vetor 2D entre dois vetores 2D.
+     * 
+     * @param v O vetor.
+     * @param min O vetor mínimo.
+     * @param max O vetor máximo.
+     * @return Um novo vetor fixado entre o vetor mínimo e o vetor máximo.
+     */
+    public static Vector2D vector2DClamp( final Vector2D v, final Vector2D min, final Vector2D max ) {
+
+        Vector2D result = vector2DZero();
+
+        result.x = Math.min( max.x, Math.max( min.x, v.x ) );
+        result.y = Math.min( max.y, Math.max( min.y, v.y ) );
+
+        return result;
+
+    }
+
+    /**
+     * Realiza o clamp da magnitude do vetor entre mínimo e máximo.
+     * 
+     * @param v O vetor.
+     * @param min O valor mínimo.
+     * @param max O valor máximo.
+     * @return o valor fixado da magnitude entre os valores mínimo e máximo.
+     */
+    public static Vector2D vector2DClampValue( final Vector2D v, double min, double max ) {
+
+        Vector2D result = new Vector2D( v.x, v.y );
+
+        double length = v.x * v.x + v.y * v.y;
+
+        if ( length > 0.0 ) {
+
+            length = Math.sqrt( length );
+
+            double scale = 1;    // By default, 1 as the neutral element.
+            if ( length < min ) {
+                scale = min / length;
+            } else if ( length > max ) {
+                scale = max / length;
+            }
+
+            result.x = v.x * scale;
+            result.y = v.y * scale;
+
+        }
+
+        return result;
+
+    }
+
+
+
+    /***************************************************************************
+     * Métodos utilitários variados.
+     **************************************************************************/
 
     /**
      * Limpa o fundo da tela de desenho.
@@ -2476,6 +2893,26 @@ public abstract class Engine extends JFrame {
      */
     public void clearBackground( Color color ) {
         drawRectangle( 0, 0, getScreenWidth(), getScreenHeight(), color );
+    }
+
+    /**
+     * Cria um ponto 2D usando um vetor 2D.
+     * 
+     * @param v Um vetor 2D.
+     * @return Um ponto 2D.
+     */
+    public static Point2D vector2DtoPoint2D( Vector2D v ) {
+        return new Point2D( v.x, v.y );
+    }
+
+    /**
+     * Cria um vetor 2D usando um ponto 2D.
+     * 
+     * @param p Um ponto 2D.
+     * @return Um vetor 2D.
+     */
+    public static Vector2D point2DtoVector2D( Point2D p ) {
+        return new Vector2D( p.x, p.y );
     }
 
 

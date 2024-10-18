@@ -3,20 +3,23 @@ package projetoesdlinear;
 import projetoesdlinear.engine.Engine;
 
 /**
- *
+ * Simulador de deque:
+ *     Simula as operações de inserir no início e no fim e remover do início
+ *     e do fim de uma deque encadeada/ligada/dinâmica.
+ * 
  * @author Prof. Dr. David Buzatto
  */
-public class SimuladorPilha extends Engine {
+public class SimuladorDeque extends Engine {
 
-    private Stack<String> pilha; // ctlr shift i
+    // declaração de variáveis
 
-    public SimuladorPilha() {
+    public SimuladorDeque() {
 
         // cria a janela do jogo ou simulação
         super( 
             800,                  // 800 pixels de largura
             600,                  // 600 pixels de largura
-            "Simulador de Pilhas",// título da janela
+            "Simulador de Deque", // título da janela
             true,                 // ativa a suavização (antialiasing)
             60 );                 // 60 quadros por segundo
 
@@ -45,7 +48,7 @@ public class SimuladorPilha extends Engine {
     }
 
     public static void main( String[] args ) {
-        new SimuladorPilha();
+        new SimuladorDeque();
     }
     
 }
