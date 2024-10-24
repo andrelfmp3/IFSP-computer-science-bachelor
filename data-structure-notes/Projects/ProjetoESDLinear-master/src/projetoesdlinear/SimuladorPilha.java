@@ -8,21 +8,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import projetoesdlinear.engine.Engine;
 
-/**
- * Simulador de pilha:
- *     Simula as operações de empilhar e desempilhar de uma pilha
- *     encadeada/ligada/dinâmica.
- * 
- * @author Prof. Dr. David Buzatto
- */
 public class SimuladorPilha extends Engine {
 
-    // pilha que passará pelas operações de empilhar e desempilhar
     private Stack<String> pilha;
-    
-    // valor desempilhado na última operação de desempilhar
     private String valorDesempilhado;
-    
+    private Color fonte = BLACK;
     private int raio;
     private int distanciaEntreElementos;
     private int tamanhoFonte;
@@ -30,23 +20,17 @@ public class SimuladorPilha extends Engine {
 
     public SimuladorPilha() {
 
-        // cria a janela do jogo ou simulação
         super( 
-            800,                  // 800 pixels de largura
-            600,                  // 600 pixels de largura
-            "Simulador de Pilha", // título da janela
-            true,                 // ativa a suavização (antialiasing)
-            60 );                 // 60 quadros por segundo
-
+            800,                
+            600,                  
+            "Simulador de Pilha", 
+            true,                 
+            60 );                 
     }
 
-    /**
-     * Processa a entrada inicial fornecida pelo usuário e cria
-     * e/ou inicializa os objetos/contextos/variáveis do jogo ou simulação.
-     */
     @Override
     public void criar() {
-        
+       
         pilha = new LinkedStack<>();
         
         raio = 30;
@@ -59,16 +43,10 @@ public class SimuladorPilha extends Engine {
         pilha.push( "c" );
     }
 
-    /**
-     * Atualiza os objetos/contextos/variáveis do jogo ou simulação.
-     */
     @Override
     public void atualizar() {
     }
 
-    /**
-     * Desenha o estado dos objetos/contextos/variáveis do jogo ou simulação.
-     */
     @Override
     public void desenhar() {
         desenharOpcoesEstadoPilha();
@@ -79,16 +57,15 @@ public class SimuladorPilha extends Engine {
         
         int yInicial = 30;
         
-        drawText( "1) Empilhar", 10, yInicial, tamanhoFonte, BLACK );
-        drawText( "2) Desempilhar", 10, yInicial += 30, tamanhoFonte, BLACK );
+        drawText( "1) Empilhar", 10, yInicial, tamanhoFonte, fonte );
+        drawText( "2) Desempilhar", 10, yInicial += 30, tamanhoFonte, fonte );
+        drawText( "3) Modo noturno", 10, yInicial += 30, tamanhoFonte, fonte );
         
-        drawText( "Desempilhou: " + ( valorDesempilhado == null ? "nenhum" : valorDesempilhado ), 
-                10, yInicial += 30, tamanhoFonte, BLUE );
+        drawText( "Desempilhou: " + ( valorDesempilhado == null ? "nenhum" : valorDesempilhado ), 10, yInicial += 30, tamanhoFonte, BLUE );
         
         if ( pilha.isEmpty() ) {
             drawText( "Pilha vazia!", 10, yInicial += 30, tamanhoFonte, RED );
         }
-        
     }
     
     private void desenharPilha() {
@@ -104,12 +81,12 @@ public class SimuladorPilha extends Engine {
             int yCentro = yInicialPilha + ( raio * 2  + distanciaEntreElementos ) * (elementoAtual+1);
             int yCentroAnterior = yInicialPilha + ( raio * 2  + distanciaEntreElementos ) * (elementoAtual+2);
             
-            drawCircleLines( xCentro, yCentro, raio, BLACK );
+            drawCircleLines( xCentro, yCentro, raio, fonte );
             drawText( valor, 
                     xCentro - measureText( valor, tamanhoFonte ) / 2, 
                     yCentro + 5,
                     tamanhoFonte,
-                    BLACK );
+                    fonte );
             
             // arcos    
             // ponto do início (arco de 45 graus)
@@ -153,13 +130,13 @@ public class SimuladorPilha extends Engine {
                 yCentro = yInicialPilha;
             }
 
-            drawLine( xInicial, yCentro, xFinal, yCentro, BLACK );
+            drawLine( xInicial, yCentro, xFinal, yCentro, fonte );
             
             if ( pilha.isEmpty() ) {
-                drawLine( xFinal, yCentro - 5, xFinal, yCentro + 5, BLACK );
-                drawLine( xFinal + 5, yCentro - 10, xFinal + 5, yCentro + 10, BLACK );
+                drawLine( xFinal, yCentro - 5, xFinal, yCentro + 5, fonte );
+                drawLine( xFinal + 5, yCentro - 10, xFinal + 5, yCentro + 10, fonte );
             } else {
-                desenharSeta( xFinal, yCentro, 8, 0, BLACK );
+                desenharSeta( xFinal, yCentro, 8, 0, fonte );
             }
             
             String tLabel = "topo";
@@ -168,11 +145,23 @@ public class SimuladorPilha extends Engine {
                     xInicial - measureText( tLabel, tamanhoFonte ) - 10, 
                     yCentro + 5, 
                     tamanhoFonte, 
-                    BLACK );
+                    fonte );
 
         }
         
     }
+    
+    private void modoNoturno() {
+        // Troca as cores
+        if (getBackground().equals(BLACK)) {
+            setBackground(WHITE);  // Muda o fundo para branco
+            fonte = BLACK;          // Muda a fonte para preto
+        } else {
+            setBackground(BLACK);   // Retorna o fundo para preto
+            fonte = GRAY;           // Muda a fonte para branco
+        }
+    }
+    
     
     @Override
     public void tratarTeclado( KeyEvent e, KeyboardEventType ket ) {
@@ -191,6 +180,11 @@ public class SimuladorPilha extends Engine {
                 case KeyEvent.VK_2:
                 case KeyEvent.VK_NUMPAD2:
                     simularDesempilhar();
+                    break;
+                    
+                case KeyEvent.VK_3:
+                case KeyEvent.VK_NUMPAD3:
+                    modoNoturno();
                     break;
                     
             }
