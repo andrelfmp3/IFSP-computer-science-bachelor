@@ -1,0 +1,3 @@
+A principio, iriamos usar o Umbrello, pois é complemento do exercício anterior, e uso linux.
+No entanto, não consegui adicionar atores, mesmo com o diagrama sendo do tipo diagrama de sequência.
+Optei por utilizar o plantuml para continuar o exercício, como vi alguns colegas fazendo, por não ter problema de compatibilidade com linux igual o whitestaruml, testando o script em sites.
