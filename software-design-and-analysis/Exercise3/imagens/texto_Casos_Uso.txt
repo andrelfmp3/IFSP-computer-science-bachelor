@@ -1,0 +1,41 @@
+Caso de uso: Encerrar Atendimento
+Ator: Atendente
+Curso Normal
+1. O sistema solicita o nº do atendimento [A1];
+2. O ator inicia o U.C. informando o nº do atendimento;
+3. O sistema exibe os dados do veículo, do cliente, e a lista de equipamentos do 
+atendimento;
+4. O ator confirma os equipamentos que foram realmente instalados 
+5. O sistema efetua a baixa dos equipamentos instalados no estoque, retira 
+aqueles que não foram instalados da reserva e atualiza o valor total do atendimento;
+6. O ator confirma o encerramento do atendimento;
+7. O sistema finaliza o atendimento e o caso de uso é encerrado.
+
+
+[A1] Fluxo Alternativo - atendimento não existente
+1.1 O sistema emite mensagem que o atendimento não existe e o caso de uso é encerrado.
+------------------------
+
+Caso de uso: Abrir Atendimento
+Ator: Atendente
+Curso Normal
+1. O ator inicia o U.C. selecionando a opção de abertura de atendimento;
+2. O sistema solicita a placa do veículo;
+3. O ator informa a placa do veículo;
+4. O sistema exibe as informações do veículo, dos equipamentos instalados no 
+veículo e do cliente [A1];
+5. O ator verifica os dados e informa a categoria de equipamentos para instalação;
+6. O sistema exibe uma lista de equipamentos relativos à categoria;
+7. O ator seleciona um equipamento;
+8. O sistema confirma a disponibilidade, informa o preço atualizado [A2] e volta ao 
+passo 4 por quantas vezes o ator desejar;
+9. O ator finaliza as inclusões;
+10. O sistema reserva os equipamentos informados o estoque, imprime a guia de 
+atendimento com os equipamentos por ordem de setor e encerra o caso de uso.
+
+[A1] Fluxo Alternativo - veiculo não existente 
+4.1. o sistema informa que o veículo não existe. Volta ao início do U. C.
+
+[A2] Fluxo Alternativo - equipamento indisponível no estoque
+8.1. o sistema informa que o acessório está indisponível no estoque. Volta ao passo 
+anterior.
