@@ -169,76 +169,89 @@ public class Main extends EngineFrame {
         
     }
     
-    private void ordenarInsertion(int[] array) { // usar lista 2 REVER
-        for (int i = 1; i < array.length; i++) {
+    private void ordenarInsertion(int[] array) { // https://github.com/davidbuzatto/AlgoritmosEstruturasDeDados/blob/master/src/aesd/sorting/generic/InsertionSort.java
+        
+        int n = array.length;
+        
+        int i;
+        int j;
+        
+        for (i = 1; i < n; i++) {
 
-            int j = i;
+            j = i;
 
-            while (j > 0 && array[j] < array[j - 1]) {
-                int aux = array[j];
+            while (j > 0 && array[j] < array[j - 1]) { // equivalente a compareTo (vai comparando)
+                //  SortingUtils.swap adaptado. troca os elementos adjacentes
+                int temp = array[j];
                 array[j] = array[j - 1];
-                array[j - 1] = aux;
+                array[j - 1] = temp;
                 copiarArray(lista2, array);
-                j -= 1;
+                j--; // j vai para a esquerda. 
             }
 
         }
     }
     
-    private void ordenarBubble(int[] array) { // usar lista 3 REVER
+    private void ordenarBubble(int[] array) { // https://github.com/davidbuzatto/AlgoritmosEstruturasDeDados/blob/master/src/aesd/sorting/generic/InsertionSort.java
         
+        int n = array.length;
         boolean swapped;
-        
-        for (int i = 0; i < array.length - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < array.length - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
+        int i = 0;
+        int j;
 
+        do {
+            swapped = false;
+
+            for (j = 0; j < n - i - 1; j++) {
+                if (array[j] > array[j + 1]) { // equivalente a compareTo (vai comparando)
+
+                    //  SortingUtils.swap adaptado. troca os elementos adjacentes
                     int temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     swapped = true;
-                    copiarArray(lista3, array);
+
+                    copiarArray(lista3, array);  
                 }
             }
 
-
-            if (swapped == false) {
-                break;
-            }
-        }
+            i++; 
+            
+        } while (swapped && i < n); 
     }
+
         
   
-    public void ordenarMerge(int[] array, int l, int r) { // left, right, middle REVER
-
-        if (l >= r) {
+    public void ordenarMerge(int[] array, int start, int end) { // left, right, middle. C adaptado (rever). TOP DOWN
+                                                                // sem tempMS            
+        
+        if (start >= end) { // condição diferente
             return;
         } else {
 
-            int m = (l + r) / 2;
-            ordenarMerge(array, l, m);
-            ordenarMerge(array, m + 1, r);
+            int middle = (start + end) / 2;
+            ordenarMerge(array, start, middle);
+            ordenarMerge(array, middle + 1, end);
 
-            merge(array, l, m, r);
+            merge(array, start, middle, end);
             
             copiarArray(lista4, array);
         }
 
     }
 
-    public void merge(int[] array, int l, int m, int r) { // método auxiliar mergesort
-
+    public void merge(int[] array, int start, int middle, int end) { // método auxiliar mergesort. combina metades do array ordenado
+                                                                     // sem temp           
         int[] helper = new int[array.length];
-        for (int i = l; i <= r; i++) {
+        for (int i = start; i <= end; i++) {
             helper[i] = array[i];
         }
 
-        int i = l;
-        int j = m + 1;
-        int k = l;
+        int i = start;
+        int j = middle + 1;
+        int k = start;
 
-        while (i <= m && j <= r) {
+        while (i <= middle && j <= end) {
 
             if (helper[i] <= helper[j]) {
                 array[k] = helper[i];
@@ -251,7 +264,7 @@ public class Main extends EngineFrame {
 
         }
 
-        while (i <= m) {
+        while (i <= middle) {
             array[k] = helper[i];
             i++;
             k++;
