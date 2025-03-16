@@ -6,9 +6,24 @@ import java.util.List;
 
 public class Main extends EngineFrame {
     
+    // arrays e listas
     private int[] array;
     private List<int[]> lista;
-    private int pos;
+    
+    private int[] array2;
+    private List<int[]> lista2;
+    
+    private int[] array3;
+    private List<int[]> lista3;
+    
+    private int[] array4;
+    private List<int[]> lista4;
+    
+    // contador de posicões (?)
+    private int pos; 
+    private int pos2; 
+    private int pos3; 
+    private int pos4; 
     
     private double tempoParaMudar;
     private double contadorTempo;
@@ -19,13 +34,33 @@ public class Main extends EngineFrame {
     
     @Override
     public void create() {
+        
         array = new int[]{ 9, 10, 5, 6, 3, 1, 2, 8 };
         lista = new ArrayList<>();
-        tempoParaMudar = 1;
+        
+        array2 = new int[]{ 9, 10, 5, 6, 3, 1, 2, 8 };
+        lista2 = new ArrayList<>();
+        
+        
+        array3 = new int[]{ 9, 10, 5, 6, 3, 1, 2, 8 };
+        lista3 = new ArrayList<>();
+        
+        array4 = new int[]{ 9, 10, 5, 6, 3, 1, 2, 8 };
+        lista4 = new ArrayList<>();
+        
+        tempoParaMudar = 0.8;
+        
+        /*
         copiarArray( lista, array );
+        copiarArray( lista2, array2 );
+        copiarArray( lista3, array3 );
+        copiarArray( lista4, array4 );
+        */
         
         ordenarSelection( array );
-        ordenarInsertion( array );
+        ordenarInsertion( array2 );
+        ordenarBubble( array3 );        
+        ordenarMerge( array4, 0, array4.length - 1);
     }
 
     @Override
@@ -38,7 +73,17 @@ public class Main extends EngineFrame {
             if ( pos < lista.size() - 1 ) {
                 pos++;
             }
+            if ( pos2 < lista2.size() - 1 ) {
+                pos2++;
+            }
+            if ( pos3 < lista3.size() - 1 ) {
+                pos3++;
+            }
+            if ( pos4 < lista4.size() - 1 ) {
+                pos4++;
+            }
         }
+        
         
     }
 
@@ -47,9 +92,9 @@ public class Main extends EngineFrame {
         
         clearBackground( GRAY );
         desenharArray( lista.get( pos ), 10 , getScreenHeight() / 2, 30, 10, 10 ); // Selection
-        desenharArray( lista.get( pos ), 410, getScreenHeight() / 2, 30, 10, 10 ); // Insertion
-        desenharArray( lista.get( pos ), 10 , (getScreenHeight() / 2) + 220, 30, 10, 10 ); // Bubble
-        desenharArray( lista.get( pos ), 410, (getScreenHeight() / 2) + 220, 30, 10, 10 ); // Merge
+        desenharArray( lista2.get( pos2 ), 410, getScreenHeight() / 2, 30, 10, 10 ); // Insertion
+        desenharArray( lista3.get( pos3 ), 10 , (getScreenHeight() / 2) + 220, 30, 10, 10 ); // Bubble
+        desenharArray( lista4.get( pos4 ), 410, (getScreenHeight() / 2) + 220, 30, 10, 10 ); // Merge
         
         // linha horizontal 
         drawLine( 0, (getScreenHeight() / 2) + 1, 800, getScreenHeight() / 2 + 1, RED ); 
@@ -64,10 +109,10 @@ public class Main extends EngineFrame {
         drawLine( 0, 449, 800, 449, RED ); 
         
         // Títulos
-        drawText( "Selection Sort: ", 50, 20, 20, BLACK );
-        drawText( "Insertion Sort:", 450, 20, 20, BLACK );
-        drawText( "Bubble Sort:   ", 50, 250, 20, BLACK );
-        drawText( "Merge Sort:   ", 450, 250, 20, BLACK );
+        drawText( "Selection Sort:  ",050, 020, 020, BLACK );
+        drawText( "Insertion Sort: ", 450, 020, 020, BLACK );
+        drawText( "Bubble Sort:    ", 050, 250, 020, BLACK );
+        drawText( "Merge Sort:    " , 450, 250, 020, BLACK );
 
     }
     
@@ -85,16 +130,26 @@ public class Main extends EngineFrame {
             int espacamento, 
             int tamanhoPedaco ) {
         
-        for ( int i = 0; i < array.length; i++ ) {
-            fillRectangle( 
-                    x + i * ( largura + espacamento ), 
-                    y - array[i] * tamanhoPedaco, 
-                    largura, 
-                    array[i] * tamanhoPedaco, 
-                    BLACK
-            );
-        }
         
+        for ( int i = 0; i < array.length; i++ ) {
+            if (array[i] == 1){
+                fillRectangle( 
+                        x + i * ( largura + espacamento ), 
+                        y - array[i] * tamanhoPedaco, 
+                        largura, 
+                        array[i] * tamanhoPedaco, 
+                        RED
+                );
+            } else {
+                fillRectangle( 
+                        x + i * ( largura + espacamento ), 
+                        y - array[i] * tamanhoPedaco, 
+                        largura, 
+                        array[i] * tamanhoPedaco, 
+                        BLACK
+                );
+            }
+        }
     }
     
     private void ordenarSelection( int[] array ) {
@@ -114,21 +169,93 @@ public class Main extends EngineFrame {
         
     }
     
-        private void ordenarInsertion( int[] array ) {
+    private void ordenarInsertion(int[] array) { // usar lista 2 REVER
+        for (int i = 1; i < array.length; i++) {
+
+            int j = i;
+
+            while (j > 0 && array[j] < array[j - 1]) {
+                int aux = array[j];
+                array[j] = array[j - 1];
+                array[j - 1] = aux;
+                copiarArray(lista2, array);
+                j -= 1;
+            }
+
+        }
+    }
+    
+    private void ordenarBubble(int[] array) { // usar lista 3 REVER
         
-        for ( int i = 0; i < array.length - 1; i++ ) {
-            int menor = i;
-            for ( int j = i + 1; j < array.length; j++ ) {
-                if ( array[j] < array[menor] ) {
-                    menor = j;
+        boolean swapped;
+        
+        for (int i = 0; i < array.length - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < array.length - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    swapped = true;
+                    copiarArray(lista3, array);
                 }
             }
-            int t = array[i];
-            array[i] = array[menor];
-            array[menor] = t;
-            copiarArray( lista, array );
+
+
+            if (swapped == false) {
+                break;
+            }
         }
+    }
         
+  
+    public void ordenarMerge(int[] array, int l, int r) { // left, right, middle REVER
+
+        if (l >= r) {
+            return;
+        } else {
+
+            int m = (l + r) / 2;
+            ordenarMerge(array, l, m);
+            ordenarMerge(array, m + 1, r);
+
+            merge(array, l, m, r);
+            
+            copiarArray(lista4, array);
+        }
+
+    }
+
+    public void merge(int[] array, int l, int m, int r) { // método auxiliar mergesort
+
+        int[] helper = new int[array.length];
+        for (int i = l; i <= r; i++) {
+            helper[i] = array[i];
+        }
+
+        int i = l;
+        int j = m + 1;
+        int k = l;
+
+        while (i <= m && j <= r) {
+
+            if (helper[i] <= helper[j]) {
+                array[k] = helper[i];
+                i++;
+            } else {
+                array[k] = helper[j];
+                j++;
+            }
+            k++;
+
+        }
+
+        while (i <= m) {
+            array[k] = helper[i];
+            i++;
+            k++;
+        }
     }
     
     
