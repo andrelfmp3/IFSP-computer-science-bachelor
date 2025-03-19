@@ -48,7 +48,7 @@ public class Main extends EngineFrame {
         array4 = new int[]{ 9, 10, 5, 6, 3, 1, 2, 8 };
         lista4 = new ArrayList<>();
         
-        tempoParaMudar = 0.8;
+        tempoParaMudar = 0.5;
         
         /*
         copiarArray( lista, array );
