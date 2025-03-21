@@ -25,7 +25,9 @@ def calculaDistanciaXeY():
     print(f"A distancia Y gato e rato é {distanciaY}")
 
 def exibirCaminhoGatoRato(): # apenas desenhar caminho, linha reta entre pontos. apagar a anterior
-    canvas.create_line(x_cat + 20, y_cat + 20, x_rat + 20, y_rat + 20, fill="white")
+    canvas.delete("caminho")
+    canvas.create_line(x_cat + 20, y_cat + 20, x_rat + 20, y_rat + 20, fill="white", tag="caminho")
+
     
 
 def drawCat():
