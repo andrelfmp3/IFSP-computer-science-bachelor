@@ -3,3 +3,40 @@ Trabalhando com lista aninhadas: Tente criar a
 lista a seguir, o validador (https://validator.w3.or
 g/) não poderá apresentar erros:
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background: grey;
+    }
+</style>
+<body>
+    <ol type="1"> <!-- Lista ordenada -->
+        <li> Item 1 </li>
+        <li> Item 2 </li>
+        <ol>
+            <li> Subitem 2.1 </li>
+            <li> Subitem 2.2 </li>
+        </ol>
+        <li> Item 3 </li>
+        <ol>
+            <li> Subitem 3.1 </li>
+            <li> Subitem 3.2 </li>
+            <ol>
+                <li> Subitem 3.2.1 </li>
+                <li> Subitem 3.2.2 </li>
+            </ol>
+        </ol>
+    </ol>
+</body>
+</html>
+
+<!-- André Lyra Fernandes - bv303139x
+ 27/03/2025
+ -->
