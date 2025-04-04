@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulários</title>
+</head>
+
+<body>
+    <form action="enviar.php" method="post">
+        <p>Escolha seu navegador</p>
+        <input list="browsers" name="navegador" />
+        <datalist id="browsers">
+            <option value="Explorer"></option>
+            <option value="Firefox "></option>
+            <option value="Chrome  "></option>
+            <option value="Opera   "></option>
+            <option value="Safari  "></option>
+        </datalist>
+
+        <br /><br /><br /><br />
+
+        <p>Senha</p>
+        <input type="password" name="senha" />
+
+        <p>Opções de filme</p>
+        <input type="checkbox" name="filme[]" value="drama" id="drama" />
+        <label for="drama">Drama</label>
+        <br />
+        <input type="checkbox" name="filme[]" value="ficcao" id="ficcao" />
+        <label for="ficcao">Ficção</label>
+        <br />
+
+        <p>Mensagem</p>
+        <textarea name="message" rows="10" cols="30">
+Insira uma mensagem</textarea>
+        <br />
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>
