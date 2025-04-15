@@ -1,0 +1,32 @@
+/* Cabeçalho */
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Menus */
+.menu-esquerdo {
+    background-color: #ffc107;
+    padding: 15px;
+    width: 200px;
+    float: left;
+}
+
+.menu-direito {
+    background-color: #ffc107;
+    padding: 15px;
+    width: 200px;
+    float: right;
+}
+
+/* Rodapé */
+footer {
+    clear: both;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
