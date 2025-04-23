@@ -17,10 +17,9 @@ imagem2_eq = cv2.equalizeHist(imagem2)
 histograma1_eq = cv2.calcHist([imagem1_eq], [0], None, [256], [0, 256])
 histograma2_eq = cv2.calcHist([imagem2_eq], [0], None, [256], [0, 256])
 
-# Plotar os histogramas
 plt.figure()
 
-plt.title("Comparação de Histogramas")
+plt.title("Comparaçã")
 plt.xlabel("Intensidade do Pixel")
 plt.ylabel("Número de Pixels")
 
