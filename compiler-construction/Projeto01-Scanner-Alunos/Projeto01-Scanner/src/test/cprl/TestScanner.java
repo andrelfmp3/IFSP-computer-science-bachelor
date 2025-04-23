@@ -24,7 +24,7 @@ public class TestScanner {
         // quando achar que está tudo ok, execute o teste (no pacote de testes)
         // correspondente para a verificação final
         
-        executar( "../examples/ScannerTests/Correct/Correct_01.cprl" );
+        //executar( "../examples/ScannerTests/Correct/Correct_01.cprl" );
         //executar( "../examples/ScannerTests/Correct/Correct_02.cprl" );
         //executar( "../examples/ScannerTests/Incorrect/Incorrect_01.cprl" );
         //executar( "../examples/ScannerTests/Incorrect/Incorrect_02.cprl" );
