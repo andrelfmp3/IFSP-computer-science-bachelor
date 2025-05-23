@@ -1,0 +1,82 @@
+<!-- Entre em contato conosco Nome Data de nascimento Email Celular Mensagem Limpar Envia sua mensagem -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatos Responsivo</title>
+  <link rel="stylesheet" href="../css/style_contatos-melhor.css">
+</head>
+<body>
+  <main>
+    <section class="form-container">
+      <!-- Entre em contato conosco -->
+      <h1>Entre em contato conosco</h1>
+      <form action="#" method="POST">
+        
+        <!-- Nome -->
+        <div class="form-group">           <!-- Mais intuitivo que mb -->
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="usuario_nome" required>
+        </div>
+
+        <!-- Data de nascimento -->
+        <div class="form-group">
+          <label for="nascimento">Data de Nascimento:</label>
+          <input type="date" id="nascimento" name="usuario_data" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="usuario_email" required>
+        </div>
+
+        <!-- Celular -->
+        <div class="form-group">
+          <label for="celular">Celular:</label>
+          <input type="tel" id="celular" name="usuario_celular" required>
+        </div>
+
+        <!-- Mensagem -->
+        <div class="form-group">
+          <label for="mensagem">Mensagem:</label>
+          <textarea id="mensagem" name="usuario_mensagem" rows="4" required></textarea>
+        </div>
+
+        <!-- Botões -->
+        <div class="form-group">
+          <button type="reset">Limpar</button>
+          <button type="submit">Enviar sua mensagem</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+</body>
+</html>
+
+<!-- 
+
+  ------------------------------------------------------------------
+  MEDIA QUERY RESPONSIVA - COMENTÀRIOS
+  ------------------------------------------------------------------
+
+  Abaixo o media query que aplica estilos SOMENTE em telas 
+  com largura mínima de 992px. Este é um "breakpoint", ou ponto de quebra, isando responsividade. 
+  O conceito aqui é desktop-first responsivo, onde os estilos servem para mobile.
+
+  Não foi utilizado Bootstrap, como solicitado no exercício, para manter o controle total do CSS, sem dependências externas.
+
+
+    Resumo:
+   - O layout é fluido, sem uso de bibliotecas externas.
+   - O breakpoint de 992px é usado para separar tablets de desktops.
+   - A responsividade é feita com CSS puro.
+   - Grid Layout e Flexbox são combinados para maior controle.
+
+   André Lyra Fernandes - bv303139x 
+   Implementação: 15/05/2025
+
+ -->

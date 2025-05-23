@@ -1,0 +1,27 @@
+table {
+    width: 500px; /* largura */
+    border-style:solid
+}
+
+td { /* coluna */
+    text-align: left;
+    padding: 3px;
+    height: 25px;
+    vertical-align: top;
+    text-align: center;
+}
+
+th { /* header */
+    height: 50px;
+    vertical-align: top;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+}
+
+tr:nth-child(even) { /* Se for impar, é branco. */
+    background-color: #f2f2f2;
+}
+
+ /* André Lyra Fernandes - bv303139x */

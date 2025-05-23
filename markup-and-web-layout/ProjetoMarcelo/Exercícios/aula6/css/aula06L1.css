@@ -1,0 +1,40 @@
+/* Cabeçalho */
+header {                           /* REFERENCIA HEADER. TAG */
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Menu Encima*/
+nav {
+    background-color: #ffc107;
+    padding: 1px;
+}
+
+section {
+    margin-top: 2px; /* 2 pixeis acima */
+    margin-bottom: 2px; /* 2 pixeis abaixo */
+    padding: 10px;
+}
+
+.normal_dot {   /* classe. se # é id. */ 
+    border-style: dotted;
+}
+
+/*
+p.normal_dot {                      aplica-se apenas em tag <p>
+    border-style: dotted;
+}
+*/
+
+/* Rodapé */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+ /* André Lyra Fernandes - bv303139x */

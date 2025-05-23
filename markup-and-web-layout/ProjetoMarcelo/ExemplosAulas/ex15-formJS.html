@@ -1,0 +1,19 @@
+<body>
+  <form name="myForm" action="demo_form.asp" onsubmit="return validateForm()" method="post">
+    Name: <input type="text" name="fname">
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+
+<head>
+  <meta charset="utf-8">
+  <script>
+    function validateForm() {
+      var x = document.forms["myForm"]["fname"].value;
+      if (x == null || x == "") {
+        alert("Nome deve ser digitado");
+        return false;
+      }
+    }
+  </script>
+</head>

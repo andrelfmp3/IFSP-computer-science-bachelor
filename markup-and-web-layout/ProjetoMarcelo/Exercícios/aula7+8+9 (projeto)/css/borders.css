@@ -1,0 +1,53 @@
+p.dotted {
+    border: 2px dotted black;
+    padding: 10px;
+}
+
+p.dashed {
+    border: 2px dashed black; 
+    /*border-width: 2px 10px 4px 20px;*/
+    /*border-color: blue red purple green ; */
+    padding: 10px;
+}
+
+p.solid {
+    border: 2px solid black; 
+    padding: 10px;
+}
+
+p.double {
+    border: 4px double black; 
+    padding: 10px;
+}
+
+p.groove {
+    border: 4px groove black; 
+    padding: 10px;
+}
+
+p.ridge {
+    border: 4px ridge black; 
+    padding: 10px;
+}
+
+p.inset {
+    border: 4px inset black; 
+    padding: 10px;
+}
+
+p.outset {
+    border: 4px outset black; 
+    padding: 10px;
+}
+
+p.none {
+    border: none; 
+    padding: 10px;
+}
+
+p.hidden {
+    border: hidden; 
+    padding: 10px;
+}
+
+ /* André Lyra Fernandes - bv303139x */

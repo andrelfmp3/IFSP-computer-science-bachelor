@@ -1,0 +1,32 @@
+body {
+    margin: 0; /* Remove a margem padrão do corpo da página */
+    font-family: Arial, sans-serif; /* Define a fonte do texto para Arial e, se não disponível, uma fonte genérica sem serifa */
+}
+
+.menu-navegacao {
+    /* position: fixed;
+    top: 0; /* posicionaria no topo */
+    width: 100%; /* largura */
+    list-style: none; /* Remove os marcadores padrão dos itens de lista */
+    padding: 0; /* Remove o preenchimento interno da lista */
+    margin: 0; /* Remove a margem externa da lista */
+    display: flex; /* Exibe os itens da lista lado a lado (em linha) */
+    background-color: #222; /* Define um fundo escuro para o menu */
+    overflow: hidden; /* Impede que o conteúdo ultrapasse os limites do menu, evitando rolagem ou quebra de layout */
+}
+
+.menu-navegacao li a {
+    display: block; /* Faz com que o link ocupe todo o espaço do item da lista */
+    background-color: #222; /* Garante que o fundo do link tenha a mesma cor do menu */
+    color: white; /* Define a cor do texto como branca */
+    padding: 15px 20px; /* Adiciona espaçamento interno ao redor do texto (15px acima/abaixo, 20px à esquerda/direita) */
+    text-decoration: none; /* Remove o sublinhado padrão dos links */
+    transition: background-color 0.3s ease; /* Suaviza a transição da cor de fundo ao passar o mouse */
+}
+
+.menu-navegacao li a:hover {
+    background-color: #4CAF50; /* Altera a cor de fundo para verde ao passar o mouse */
+    color: white; /* Garante que a cor do texto continue branca ao passar o mouse */
+}
+
+ /* André Lyra Fernandes - bv303139x */

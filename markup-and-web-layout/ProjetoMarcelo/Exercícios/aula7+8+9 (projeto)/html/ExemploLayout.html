@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo de Layout com Iframe</title>
+  <link rel="stylesheet" type="text/css" href="../css/full_layout.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Topo do Site</h1>
+  </header>
+
+  <!-- Div da Classe Container-->
+  <div class="container">
+    <nav class="sidebar-nav">   <!-- Div da Classe Barra Lateral (Modificada no Exercício)-->
+      <ul class="menu-links">   <!-- Div com Menu dos Links-->
+
+        <li><a href="borders.html" target="conteudo-frame">Bordas</a></li>
+        <li><a href="tabelas.html" target="conteudo-frame">Tabelas</a></li>
+
+        <li class="has-submenu"> <!-- Sub-menu de navegação -->
+          <span class="menu-item">Navegação ▼</span>
+          <ul class="sub-menu-links"> <!-- Rever Sublinks -->
+            <li><a href="navegacao.html" target="conteudo-frame">Barra Nav</a></li>
+            <li><a href="tabelaJogos.html" target="conteudo-frame">Tabela Jogos</a></li>
+          </ul>
+        </li>
+        
+        <li><a href="pagina4.html" target="conteudo-frame">Link 4</a></li>
+        <li><a href="contato.html" target="conteudo-frame">Contatos V1.0</a></li>
+        <li><a href="contatoResponsivo.html" target="conteudo-frame">Contatos V2.0 (Prova)</a></li>
+        <li><a href="contatoBootstrap.html" target="conteudo-frame">Contatos V3.0</a></li>
+
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <iframe name="conteudo-frame" class="conteudo-frame" src="" frameborder="0"></iframe>
+    </main>
+
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="site-footer">
+    <p>Rodapé do Site</p>
+  </footer>
+
+</body>
+</html>
+
+<!-- André Lyra Fernandes - bv303139x
+ -->

@@ -1,0 +1,11 @@
+#example1 {
+  border: 2px solid red;
+  border-radius: 25px;
+}
+
+#example2 {
+  border: 5px solid blue;
+  border-radius: 50px 200px;
+}
+
+ /* André Lyra Fernandes - bv303139x */

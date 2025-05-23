@@ -1,0 +1,118 @@
+/* Reset e fonte padrão */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Cabeçalho do site */
+.site-header {
+  height: 90px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container principal: barra lateral + conteúdo */
+.container {
+  display: flex;
+  min-height: calc(100vh - 140px); /* altura total - header e footer */
+}
+
+/* Menu lateral (sidebar)  ALTERADO NO EXERCICIO*/
+.sidebar-nav {
+  /* Largura ajustável: mínimo 120px, máximo 300px, baseado em largura da tela */
+  width: clamp(120px, 22vw, 300px);
+  background-color: #0a2a66; 
+  padding: 20px;
+  flex-shrink: 0; /* impede que o flexbox comprima o menu */
+}
+
+/* Lista de links do menu */
+.menu-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilo dos links */
+.menu-links li a,
+.menu-links li .menu-item {
+  display: block;
+  background-color: #0a2a66;
+  color: white;
+  padding: 15px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito hover nos links */
+.menu-links li a:hover,
+.menu-links li .menu-item:hover {
+  background-color: #3b5fa3; /* azul mais claro */
+}
+
+/* Conteúdo principal */
+.main-content {
+  flex: 1; /* ocupa o espaço restante */
+  padding: 20px;
+  background-color: #fff;
+  min-width: 0; /* evita que quebre o layout em telas menores */
+}
+
+/* Frame interno do conteúdo, se for usado */
+.conteudo-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  min-height: 100%;
+}
+
+/* Rodapé */
+.site-footer {
+  height: 50px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Submenu (lista dentro de um item) */
+.sub-menu-links {
+  list-style: none;
+  padding-left: 20px; /* desloca para a direita */
+  margin-top: 5px;
+}
+
+/* Links do submenu */
+.sub-menu-links li a {
+  display: block;
+  background-color: #0a2a66;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: 0.9em;
+}
+
+/* "Hover" nos links do submenu */
+.sub-menu-links li a:hover {
+  background-color: #3b5fa3;
+}
+
+/* Item que contém submenu */
+.has-submenu {
+  position: relative;transition: width 0.3s ease;
+}
+
+/* Submenu escondido por padrão */
+.has-submenu .sub-menu-links {
+  display: none;
+}
+
+/* Exibe submenu ao passar o mouse */
+.has-submenu:hover .sub-menu-links {
+  display: block;
+}
+
+/* André Lyra Fernandes - bv303139x */

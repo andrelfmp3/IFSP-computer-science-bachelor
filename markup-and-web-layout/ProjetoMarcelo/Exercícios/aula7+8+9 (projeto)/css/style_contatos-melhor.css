@@ -1,0 +1,138 @@
+/* Reset geral de margens, preenchimentos e box model */
+* {
+  margin: 0;                      /* Remove todas as margens padrão do navegador */
+  padding: 0;                     /* Remove preenchimentos padrão */
+  box-sizing: border-box;         /* Inclui padding e border dentro do cálculo da largura/altura */
+}
+
+/* Estilo geral do corpo da página */
+body {
+  font-family: Arial, sans-serif; /* Fonte limpa e legível */
+  background-color: #f9f9f9;      /* Cor de fundo neutra */
+  color: #000;                    /* Texto preto para alto contraste */
+  padding: 40px;                  /* Espaçamento interno em toda a borda da página */
+}
+
+/* Contêiner principal do formulário */
+.form-container {
+  max-width: 100%;                /* Ocupa toda a largura disponível */
+  background-color: #fff;        
+  padding: 20px;                  
+  border: 1px solid #ccc;         /* Borda cinza clara */
+  margin: auto;                   /* Centraliza o formulário horizontalmente (padrão) */
+}
+
+/* Título do formulário */
+.form-container h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: normal;
+  text-align: center;
+}
+
+/* Grupo de campos (label + input ou textarea) */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Rótulo (label) dos campos */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Campos de entrada de texto e textarea */
+.form-group input,
+.form-group textarea {
+  width: 100%;                   /* Ocupa toda a largura disponível */
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #000;
+}
+
+/* Botões de enviar e resetar */
+.form-group button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: 1px solid #000;
+  background-color: transparent;
+  color: #000;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Estilo ao passar o mouse sobre os botões */
+.form-group button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/*------------------------------------------------------------------
+  MEDIA QUERY RESPONSIVA - COMENTÀRIOS
+  ------------------------------------------------------------------
+
+  Abaixo o media query que aplica estilos SOMENTE em telas 
+  com largura mínima de 992px. Este é um "breakpoint", ou ponto de quebra, isando responsividade. 
+  O conceito aqui é desktop-first responsivo, onde os estilos servem para mobile.
+
+  Não foi utilizado Bootstrap, como solicitado no exercício, para manter o controle total do CSS, sem dependências externas.
+
+*/
+
+@media (min-width: 992px) {
+
+  /* Muda a cor de fundo como indicação visual */
+  body {
+    background-color: #e0f0ff;   /* Azul claro */
+  }
+
+  /* Limita a largura do formulário para não esticar demais */
+  .form-container {
+    max-width: 800px;
+  }
+
+  /* Aplica Grid Layout no formulário */
+  form {
+    display: grid;                         /* Usa CSS Grid */
+    grid-template-columns: 1fr 1fr;        /* 2 colunas de largura igual */
+    gap: 20px;                             /* Espaço entre os campos */
+  }
+
+  /* Cada grupo continua em coluna (label + input) */
+  .form-group {
+    display: flex;                         /* Flexbox */
+    flex-direction: column;               /* Alinha os elementos verticalmente */
+  }
+
+  /* Faz textarea e o grupo de botões ocuparem as 2 colunas */
+  .form-group textarea,
+  .form-group:last-child {
+    grid-column: 1 / -1;                   /* Ocupa da 1ª até a última coluna */
+  }
+
+  /* Aplica flex para posicionar botões lado a lado */
+  .form-group:last-child {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* Botões se adaptam ao conteúdo */
+  button {
+    width: auto;
+  }
+}
+
+/* 
+
+    Resumo:
+   - O layout é fluido, sem uso de bibliotecas externas.
+   - O breakpoint de 992px é usado para separar tablets de desktops.
+   - A responsividade é feita com CSS puro.
+   - Grid Layout e Flexbox são combinados para maior controle.
+
+   André Lyra Fernandes - bv303139x 
+   Implementação: 15/05/2025
+*/
