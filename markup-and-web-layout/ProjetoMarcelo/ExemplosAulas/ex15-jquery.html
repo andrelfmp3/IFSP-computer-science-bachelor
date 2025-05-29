@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("p").click(function(){
+        $(this).hide();
+      });
+    });
+
+    $(document).ready(function(){
+      $("h1").click(function(){
+        $("p").show();
+      });
+    });
+  </script>
+</head>
+<body>
+  <p>Parágrafo</p>
+  <h1>Liberar</h1>
+</body>
+</html>
