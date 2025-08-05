@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ex 10</title>
+  <script src="BV303139X-ex10.js" defer></script>
+  <style>
+    body {
+      background-color: black;
+      color: rgb(238, 255, 0);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    label,
+    input {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    input {
+      padding: 6px;
+      border-radius: 5px;
+      border: none;
+      width: 250px;
+    }
+
+    button {
+      background-color: rgb(56, 54, 55);
+      border: none;
+      color: black;
+      padding: 8px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    #mensagem {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Formulário de Login</h1>
+  <h2>Exercicio 10 </h2>
+  <form id="loginForm">
+    <label for="login">Login (nome completo):</label>
+    <input type="text" id="login" name="login" placeholder="Digite seu nome completo" required />
+
+    <label for="senha">Senha (prontuário):</label>
+    <input type="password" id="senha" name="senha" placeholder="Digite seu BV" required />
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <div id="mensagem"></div>
+
+
+</body>
+
+</html>
+
+<!--Author: Andre Lyra Fernandes
+Implementação 20/06/25
+BV303139X-->
