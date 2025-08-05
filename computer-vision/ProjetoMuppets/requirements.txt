@@ -1,0 +1,4 @@
+python==3.10.16
+opencv==4.10.0 # via conda
+mediapipe==0.10.21 # via pip (não disponível via conda), tem numpy como dependencia
+pyqt5==5.15.11 # via pip (deu bug) 
