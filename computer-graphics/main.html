@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body {
+            color: white; /* Cor do texto */
+            background-color: black; /* Cor do fundo */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Teste de Computação Gráfica</h1>
+        <button id="trocarCor">Trocar Cor</button>
+        <button id="ocultar">Ocultar</button>
+        <p>Texto Genérico</p>
+    </div>
+    <button id="voltar">Voltar</button>
+
+    <script>
+        const trocarCor = document.getElementById('trocarCor');
+        const ocultar = document.getElementById('ocultar');
+        const voltar = document.getElementById('voltar');
+        const container = document.getElementById('container');
+
+        trocarCor.addEventListener("click", () => {
+            const atual = document.body.style.backgroundColor;
+            document.body.style.backgroundColor = (atual === 'black') ? 'blue' : 'black';
+        });
+
+        ocultar.addEventListener("click", () => {
+            const container = document.getElementById('container'); 
+            container.style.display = "none";
+            voltar.style.display = "block"; // Exibe o botão Voltar
+        });
+
+        voltar.addEventListener("click",() => {
+            const container = document.getElementById('container'); 
+            container.style.display = "block";
+            voltar.style.display = "none"; // Oculta o botão Voltar
+        });
+
+
+    </script>
+</body>
+</html>
